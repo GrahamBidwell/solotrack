@@ -1,0 +1,40 @@
+name: Build SoloTrack for Windows
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+      - name: Build Release
+        run: cmake --build build --config Release --parallel
+
+      - name: Package executable
+        shell: pwsh
+        run: |
+          $executable = Get-ChildItem -Path build -Recurse -Filter "SoloTrack Studio.exe" | Select-Object -First 1
+          if (-not $executable) {
+            throw "SoloTrack Studio.exe was not found under the build directory."
+          }
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item $executable.FullName dist\
+          Compress-Archive -Path dist\* -DestinationPath SoloTrack-Windows-x64.zip
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoloTrack-Windows-x64
+          path: SoloTrack-Windows-x64.zip
+          if-no-files-found: error
