@@ -1,0 +1,29 @@
+name: Build SoloTrack Windows
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build Executable
+        run: cmake --build build --config Release --parallel
+
+      - name: Upload Executable Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoloTrack-Windows-x64
+          path: |
+            build/**/SoloTrack.exe
+            build/**/SoloTrack_artefacts/**/SoloTrack.exe
+          if-no-files-found: error

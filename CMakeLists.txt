@@ -37,7 +37,7 @@ FetchContent_MakeAvailable(JUCE)
 
 # ---- Application target ---------------------------------------------------
 juce_add_gui_app(solotrack
-    PRODUCT_NAME   "SoloTrack Studio"
+    PRODUCT_NAME   "SoloTrack"
     BUNDLE_ID      com.solotrack.studio
     COMPANY_NAME   "SoloTrack"
     COMPANY_WEBSITE "https://example.invalid/solotrack"

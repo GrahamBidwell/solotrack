@@ -1,5 +1,6 @@
 build/
 .vs/
+.idea/
 out/
 dist/
 *.user

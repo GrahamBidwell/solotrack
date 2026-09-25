@@ -24,9 +24,9 @@ jobs:
       - name: Package executable
         shell: pwsh
         run: |
-          $executable = Get-ChildItem -Path build -Recurse -Filter "SoloTrack Studio.exe" | Select-Object -First 1
+          $executable = Get-ChildItem -Path build -Recurse -Filter "SoloTrack.exe" | Select-Object -First 1
           if (-not $executable) {
-            throw "SoloTrack Studio.exe was not found under the build directory."
+            throw "SoloTrack.exe was not found under the build directory."
           }
           New-Item -ItemType Directory -Force -Path dist | Out-Null
           Copy-Item $executable.FullName dist\

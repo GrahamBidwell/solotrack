@@ -26,6 +26,7 @@ public:
         // Stereo loopback: 2 hardware inputs -> 2 hardware outputs.
         // The selector component lets the user pick driver / sample rate /
         // buffer size at runtime; 128 is a sensible default.
+        addAndMakeVisible(selector);
         setAudioChannels(2, 2);
         setAudioBufferSize(128);
     }
