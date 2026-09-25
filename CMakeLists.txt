@@ -20,7 +20,7 @@ juce_add_gui_app(SoloTrack
 )
 
 target_sources(SoloTrack PRIVATE
-    Main.cpp
+    Source/Main.cpp
 )
 
 target_link_libraries(SoloTrack PRIVATE
