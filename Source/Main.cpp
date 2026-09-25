@@ -201,8 +201,8 @@ public:
         volume.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 20);
         volume.onValueChange = [this]
         {
-            if (gainChanged)
-                gainChanged(juce::Decibels::decibelsToGain((float) volume.getValue(), -100.0f));
+            if (this->gainChanged != nullptr)
+                this->gainChanged(juce::Decibels::decibelsToGain((float) volume.getValue(), -100.0f));
         };
         addAndMakeVisible(volume);
 
@@ -212,24 +212,24 @@ public:
         pan.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 76, 20);
         pan.onValueChange = [this]
         {
-            if (panChanged)
-                panChanged((float) pan.getValue());
+            if (this->panChanged != nullptr)
+                this->panChanged((float) pan.getValue());
         };
         addAndMakeVisible(pan);
 
         mute.setButtonText("Mute");
         mute.onClick = [this]
         {
-            if (muteChanged)
-                muteChanged(mute.getToggleState());
+            if (this->muteChanged != nullptr)
+                this->muteChanged(mute.getToggleState());
         };
         addAndMakeVisible(mute);
 
         solo.setButtonText("Solo");
         solo.onClick = [this]
         {
-            if (soloChanged)
-                soloChanged(solo.getToggleState());
+            if (this->soloChanged != nullptr)
+                this->soloChanged(solo.getToggleState());
         };
         addAndMakeVisible(solo);
     }
