@@ -366,7 +366,7 @@ private:
     void timerCallback() override
     {
         const auto length = engine.getLength();
-        positionSlider.setRange(0.0, juce::jmax(1.0, length), 0.01, false);
+        positionSlider.setRange(0.0, juce::jmax(1.0, length), 0.01);
         if (!positionSlider.isMouseButtonDown())
             positionSlider.setValue(engine.getPosition(), juce::dontSendNotification);
 
